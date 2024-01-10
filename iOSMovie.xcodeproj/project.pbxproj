@@ -11,6 +11,8 @@
 		897DA7E82B403D3200A91610 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897DA7E72B403D3200A91610 /* MovieModel.swift */; };
 		897DA7EF2B404FF100A91610 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 897DA7EE2B404FF100A91610 /* Kingfisher */; };
 		897DA7F12B40518000A91610 /* SearchMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897DA7F02B40518000A91610 /* SearchMovieView.swift */; };
+		899DDCA42B4EE6D3007EDAE7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 899DDCA32B4EE6D3007EDAE7 /* Lottie */; };
+		899DDCA72B4EE986007EDAE7 /* Loading_Lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 899DDCA62B4EE986007EDAE7 /* Loading_Lottie.json */; };
 		899F2C212B4D59BC00568110 /* MovieClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F2C202B4D59BC00568110 /* MovieClient.swift */; };
 		89DC08E52B1F4474004EA9E4 /* iOSMovieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DC08E42B1F4474004EA9E4 /* iOSMovieApp.swift */; };
 		89DC08E72B1F4474004EA9E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DC08E62B1F4474004EA9E4 /* ContentView.swift */; };
@@ -28,6 +30,7 @@
 /* Begin PBXFileReference section */
 		897DA7E72B403D3200A91610 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		897DA7F02B40518000A91610 /* SearchMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieView.swift; sourceTree = "<group>"; };
+		899DDCA62B4EE986007EDAE7 /* Loading_Lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Loading_Lottie.json; sourceTree = "<group>"; };
 		899F2C202B4D59BC00568110 /* MovieClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieClient.swift; sourceTree = "<group>"; };
 		89DC08E12B1F4474004EA9E4 /* iOSMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89DC08E42B1F4474004EA9E4 /* iOSMovieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSMovieApp.swift; sourceTree = "<group>"; };
@@ -50,12 +53,21 @@
 			files = (
 				897DA7EF2B404FF100A91610 /* Kingfisher in Frameworks */,
 				897DA7E62B403D0400A91610 /* ComposableArchitecture in Frameworks */,
+				899DDCA42B4EE6D3007EDAE7 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		899DDCA52B4EE976007EDAE7 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				899DDCA62B4EE986007EDAE7 /* Loading_Lottie.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		89DC08D82B1F4474004EA9E4 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +135,7 @@
 		89DC08FA2B21D243004EA9E4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				899DDCA52B4EE976007EDAE7 /* Lottie */,
 				89DC08E82B1F4475004EA9E4 /* Assets.xcassets */,
 				89F0CD8D2B42ABA500434081 /* Color.xcassets */,
 			);
@@ -184,6 +197,7 @@
 			packageProductDependencies = (
 				897DA7E52B403D0400A91610 /* ComposableArchitecture */,
 				897DA7EE2B404FF100A91610 /* Kingfisher */,
+				899DDCA32B4EE6D3007EDAE7 /* Lottie */,
 			);
 			productName = iOSMovie;
 			productReference = 89DC08E12B1F4474004EA9E4 /* iOSMovie.app */;
@@ -216,6 +230,7 @@
 			packageReferences = (
 				897DA7E42B403D0400A91610 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				897DA7ED2B404FF100A91610 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				899DDCA22B4EE6D3007EDAE7 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 89DC08E22B1F4474004EA9E4 /* Products */;
 			projectDirPath = "";
@@ -232,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89DC08EC2B1F4475004EA9E4 /* Preview Assets.xcassets in Resources */,
+				899DDCA72B4EE986007EDAE7 /* Loading_Lottie.json in Resources */,
 				89DC08E92B1F4475004EA9E4 /* Assets.xcassets in Resources */,
 				89F0CD8E2B42ABA500434081 /* Color.xcassets in Resources */,
 			);
@@ -478,6 +494,14 @@
 				minimumVersion = 7.10.1;
 			};
 		};
+		899DDCA22B4EE6D3007EDAE7 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.3.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -490,6 +514,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 897DA7ED2B404FF100A91610 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		899DDCA32B4EE6D3007EDAE7 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 899DDCA22B4EE6D3007EDAE7 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
