@@ -13,6 +13,13 @@ struct HomeView: View {
         Color.blue.opacity(0.3)
           .ignoresSafeArea(.all)
         Text("Home")
+          .task {
+            do {
+              print(try await MovieClient().getTopRatedMovie())
+            } catch {
+              print(error)
+            }
+          }
       }
     }
 }
