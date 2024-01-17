@@ -60,6 +60,7 @@ struct ResultModel: Codable {
   
   func toEntity() -> Datum {
     Datum(
+      index: 0,
       adult: adult ?? false,
       backdropPath: backdropPath ?? "",
       genreIDS: genreIDS ?? [],

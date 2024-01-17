@@ -21,7 +21,7 @@ struct ContentView: View {
           SearchView()
             .tag(2)
         }
-        .tabViewStyle(.page(indexDisplayMode: .never))
+//        .tabViewStyle(.page(indexDisplayMode: .never))
         //      .ignoresSafeArea(.all)
         
         TabBarView(currentTab: $currentTab)

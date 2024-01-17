@@ -15,6 +15,7 @@ public struct Movie {
 }
 
 public struct Datum: Codable, Identifiable {
+  public var index: Int
   public let adult: Bool
   public let backdropPath: String
   public let genreIDS: [Int]
