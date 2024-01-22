@@ -55,17 +55,23 @@ extension SearchMovieView {
         ForEach(0..<Int(trunc(vote)), id: \.self) { _ in
           Image(systemName: "star.fill")
             .foregroundStyle(Color.yellow)
-            .onAppear { starCnt += 1 }
+            .onAppear { 
+              starCnt += 1
+            }
         }
         if starCnt != 5 {
           if Int(vote * 10) % 10 >= 5 {
             Image(systemName: "star.leadinghalf.filled")
               .foregroundStyle(Color.yellow)
-              .onAppear { starCnt += 1 }
+              .onAppear {
+                starCnt += 1
+              }
           }
-          ForEach(starCnt..<5, id: \.self) { index in
-            Image(systemName: "star")
-              .foregroundStyle(Color.yellow)
+          if(starCnt < 5) {
+            ForEach(starCnt..<5, id: \.self) { index in
+              Image(systemName: "star")
+                .foregroundStyle(Color.yellow)
+            }
           }
         }
         Text(String(vote))
