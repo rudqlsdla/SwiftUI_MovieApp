@@ -46,47 +46,31 @@ struct HomeView: View {
 
 extension HomeView {
   struct PageView: View {
+    @State private var selectedMovie: Datum?
     @State private var snappedItem = 0.0
     @State private var draggingItem = 0.0
     @Binding var topRatedMovieList: [Datum]
     
     var body: some View {
-      
-      //      TabView {
-      //        ForEach(topRatedMovieList) { movie in
-      //          KFImage(URL(string: "https://image.tmdb.org/t/p/w500/\(movie.backdropPath)"))
-      //            .placeholder {
-      //              Image(systemName: "movieclapper")
-      //            }
-      //            .fade(duration: 1)
-      //            .resizable()
-      //            .overlay(
-      //              LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.5)]),
-      //                             startPoint: .top,
-      //                             endPoint: .bottom)
-      //            )
-      //        }
-      //      }
-      //      .frame(width: width, height: 400)
-      //      .tabViewStyle(PageTabViewStyle())
-      //
       ZStack {
         ForEach(topRatedMovieList) { movie in
-          
           // article view
           VStack {
-            KFImage(URL(string: "https://image.tmdb.org/t/p/w500/\(movie.posterPath)"))
-              .resizable()
-              .frame(width: 250, height: 500)
+            KFImage(URL(string: "https://image.tmdb.org/t/p/w342/\(movie.posterPath)"))
+//              .resizable()
               .scaledToFit()
               .clipShape(.rect(cornerRadius: 3))
-            Text(movie.title)
-              .font(.title)
           }
           .scaleEffect(1.0 - abs(distance(movie.index)) * 0.2 )
           .opacity(1.0 - abs(distance(movie.index)) * 0.3 )
           .offset(x: myXOffset(movie.index), y: 0)
           .zIndex(1.0 - abs(distance(movie.index)) * 0.1)
+          .onTapGesture {
+            selectedMovie = movie
+          }
+        }
+        .sheet(item: $selectedMovie) { selectedMovie in
+          MovieDetailView(movie: selectedMovie)
         }
       }
       .gesture(

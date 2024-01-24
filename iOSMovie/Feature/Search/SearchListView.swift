@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchListView: View {
+  @State private var selectedMovie: Datum?
   @Binding var movieList: [Datum]
   @Binding var isEmpty: Bool
   
@@ -20,6 +21,12 @@ struct SearchListView: View {
         VStack(spacing: 10) {
           ForEach(movieList) { movie in
             SearchMovieView(movie: movie)
+              .onTapGesture {
+                selectedMovie = movie
+              }
+          }
+          .sheet(item: $selectedMovie) { selectedMovie in
+            MovieDetailView(movie: selectedMovie)
           }
         }
       }
