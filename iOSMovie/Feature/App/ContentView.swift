@@ -24,8 +24,8 @@ struct ContentView: View {
 //        .tabViewStyle(.page(indexDisplayMode: .never))
         //      .ignoresSafeArea(.all)
         
-        TabBarView(currentTab: $currentTab)
       }
+      TabBarView(currentTab: $currentTab)
     }
   }
 }
