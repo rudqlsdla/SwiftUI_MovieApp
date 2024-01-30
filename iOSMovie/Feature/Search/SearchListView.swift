@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SearchListView: View {
-  @State private var selectedMovie: Datum?
-  @Binding var movieList: [Datum]
+  @State private var selectedMovie: Movie?
+  @Binding var movieList: [Movie]
   @Binding var isEmpty: Bool
   
   var body: some View {

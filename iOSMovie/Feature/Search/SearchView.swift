@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
   @State private var searchText: String = ""
-  @State private var movieList: [Datum] = []
+  @State private var movieList: [Movie] = []
   @State private var isEmpty = false
   
   var body: some View {

@@ -10,7 +10,7 @@ import Lottie
 import SwiftUI
 
 struct HomeView: View {
-  @State private var topRatedMovieList: [Datum] = []
+  @State private var topRatedMovieList: [Movie] = []
   @State private var isLoading = false
   
   var body: some View {
@@ -46,10 +46,10 @@ struct HomeView: View {
 
 extension HomeView {
   struct PageView: View {
-    @State private var selectedMovie: Datum?
+    @State private var selectedMovie: Movie?
     @State private var snappedItem = 0.0
     @State private var draggingItem = 0.0
-    @Binding var topRatedMovieList: [Datum]
+    @Binding var topRatedMovieList: [Movie]
     
     var body: some View {
       ZStack {

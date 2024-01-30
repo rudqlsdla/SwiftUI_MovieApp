@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Movie
-struct MovieModel: Codable {
+struct MovieListModel: Codable {
   let page: Int?
   let results: [ResultModel]?
   let totalPages, totalResults: Int?
@@ -20,8 +20,8 @@ struct MovieModel: Codable {
     case totalResults = "total_results"
   }
   
-  func toEntity() -> Movie {
-    return Movie(
+  func toEntity() -> MovieList {
+    return MovieList(
       page: page ?? 0,
       results: results?.map { $0.toEntity() } ?? [],
       totalPages: totalPages ?? 0,
@@ -58,8 +58,8 @@ struct ResultModel: Codable {
     case voteCount = "vote_count"
   }
   
-  func toEntity() -> Datum {
-    Datum(
+  func toEntity() -> Movie {
+    Movie(
       index: 0,
       adult: adult ?? false,
       backdropPath: backdropPath ?? "",

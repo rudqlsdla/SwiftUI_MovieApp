@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchTextField: View {
   @Binding var searchText: String
-  @Binding var movieList: [Datum]
+  @Binding var movieList: [Movie]
   @Binding var isEmpty: Bool
   
   var body: some View {

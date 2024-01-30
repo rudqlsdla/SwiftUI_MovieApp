@@ -9,7 +9,7 @@ import Kingfisher
 import SwiftUI
 
 struct SearchMovieView: View {
-  let movie: Datum
+  let movie: Movie
   var vote: Double {
     return round(movie.voteAverage / 2 * 10) / 10
   }

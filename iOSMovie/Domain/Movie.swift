@@ -7,14 +7,14 @@
 
 import Foundation
 
-public struct Movie {
+public struct MovieList {
   public let page: Int
-  public let results: [Datum]
+  public let results: [Movie]
   public let totalPages: Int
   public let totalResults: Int
 }
 
-public struct Datum: Codable, Identifiable {
+public struct Movie: Codable, Identifiable {
   public var index: Int
   public let adult: Bool
   public let backdropPath: String
