@@ -16,22 +16,28 @@ struct MovieDetailView: View {
       KFImage(URL(string: "https://image.tmdb.org/t/p/w780/\(movie.backdropPath)"))
         .placeholder {
           Image(systemName: "movieclapper")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .fade(duration: 1)
+        .resizable()
+        .aspectRatio(16/9, contentMode: .fit)
         .overlay(
           LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.5)]),
                          startPoint: .top,
                          endPoint: .bottom)
         )
       
-      Text(movie.title)
-        .font(.title)
-      
-      Text(movie.releaseDate)
-        .font(.caption)
+      VStack {
+//        Text(movie.title)
+//          .multilineTextAlignment(.center)
+//          .font(.title)
+//        
+        Text(movie.releaseDate)
+          .font(.caption)
+      }
       
       Spacer()
     }
+    .navigationTitle(movie.title)
+    .navigationBarTitleDisplayMode(.inline)
   }
 }
