@@ -8,10 +8,12 @@
 import Foundation
 
 public class MovieClient {
-  func getSearchData(searchText: String) async throws -> [Datum] {
+  private let apiKey = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWM0MmYyNWYxM2UwYzU4ZjhiNDNmZDAyMjBhZGZhOCIsInN1YiI6IjY1NmFiYWMxODg2MzQ4MDBhZGUyZTM2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ApXGO8__3s4MpeYuV29nO1Ti2-goSkzvpwZGN7jFNgo"
+  
+  func getSearchData(searchText: String) async throws -> [Movie] {
     let headers = [
       "accept": "application/json",
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWM0MmYyNWYxM2UwYzU4ZjhiNDNmZDAyMjBhZGZhOCIsInN1YiI6IjY1NmFiYWMxODg2MzQ4MDBhZGUyZTM2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ApXGO8__3s4MpeYuV29nO1Ti2-goSkzvpwZGN7jFNgo"
+      "Authorization": apiKey
     ]
     
     let url = URL(string: "https://api.themoviedb.org/3/search/movie?query=\(searchText)&include_adult=false&language=ko-KR&page=1")!
@@ -22,15 +24,15 @@ public class MovieClient {
     
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
-      let movieModel = try JSONDecoder().decode(MovieModel.self, from: data)
+      let movieModel = try JSONDecoder().decode(MovieListModel.self, from: data)
       return movieModel.toEntity().results
     } catch {
       throw error
     }
   }
   
-  func getTopRatedMovie() async throws -> [Datum] {
-    let urlString = "https://api.themoviedb.org/3/movie/top_rated"
+  func getTopRatedMovie() async throws -> [Movie] {
+    let urlString = "https://api.themoviedb.org/3/movie/popular"
     var urlBuilder = URLComponents(string: urlString)
     urlBuilder?.queryItems = [
       URLQueryItem(name: "language", value: "ko-KR")
@@ -39,14 +41,35 @@ public class MovieClient {
     
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
-    let apiKey = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWM0MmYyNWYxM2UwYzU4ZjhiNDNmZDAyMjBhZGZhOCIsInN1YiI6IjY1NmFiYWMxODg2MzQ4MDBhZGUyZTM2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ApXGO8__3s4MpeYuV29nO1Ti2-goSkzvpwZGN7jFNgo"
     request.setValue(apiKey, forHTTPHeaderField: "Authorization")
     request.setValue("application/json", forHTTPHeaderField: "accept")
     
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
-      let movieModel = try JSONDecoder().decode(MovieModel.self, from: data)
+      let movieModel = try JSONDecoder().decode(MovieListModel.self, from: data)
       return movieModel.toEntity().results
+    } catch {
+      throw error
+    }
+  }
+  
+  func getGenres() async throws -> GenreList? {
+    let urlString = "https://api.themoviedb.org/3/genre/movie/list"
+    var urlBuilder = URLComponents(string: urlString)
+    urlBuilder?.queryItems = [
+      URLQueryItem(name: "language", value: "ko-KR")
+    ]
+    guard let url = urlBuilder?.url else { return nil }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    request.setValue(apiKey, forHTTPHeaderField: "Authorization")
+    request.setValue("application/json", forHTTPHeaderField: "accept")
+    
+    do {
+      let (data, _) = try await URLSession.shared.data(for: request)
+      let genreListModel = try JSONDecoder().decode(GenreListModel.self, from: data)
+      return genreListModel.toEntity()
     } catch {
       throw error
     }

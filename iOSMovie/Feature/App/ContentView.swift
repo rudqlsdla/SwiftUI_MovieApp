@@ -27,6 +27,13 @@ struct ContentView: View {
       }
       TabBarView(currentTab: $currentTab)
     }
+    .task {
+      do {
+        GenreInfo.shared.genreList = try await MovieClient().getGenres()
+      } catch {
+        print(error)
+      }
+    }
   }
 }
 
