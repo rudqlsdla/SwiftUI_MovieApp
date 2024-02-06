@@ -20,7 +20,8 @@ struct HomeView: View {
           .looping()
           .scaleEffect(4)
       }
-      VStack {
+      VStack(spacing: 7) {
+        BestMovieTextView()
         PageView(topRatedMovieList: $topRatedMovieList)
         Spacer()
       }
@@ -45,6 +46,34 @@ struct HomeView: View {
 }
 
 extension HomeView {
+  struct BestMovieTextView: View {
+    var body: some View {
+      HStack {
+        Group {
+          VStack(alignment: .leading, spacing: 0) {
+            Text("We have")
+            HStack {
+              Text("selected")
+              Text("Best")
+                .font(.system(size: 40, weight: .bold))
+                .foregroundStyle(.black121244)
+            }
+            HStack {
+              Text("Movies")
+                .font(.system(size: 40, weight: .bold))
+                .foregroundStyle(.black121244)
+              Text("for you")
+            }
+          }
+        }
+        .foregroundStyle(.black)
+        .font(.system(size: 40, weight: .semibold))
+        .padding(.leading, 28)
+        Spacer()
+      }
+    }
+  }
+  
   struct PageView: View {
     @State private var selectedMovie: Movie?
     @State private var snappedItem = 0.0
@@ -59,7 +88,8 @@ extension HomeView {
             KFImage(URL(string: "https://image.tmdb.org/t/p/w342/\(movie.posterPath)"))
 //              .resizable()
               .scaledToFit()
-              .clipShape(.rect(cornerRadius: 3))
+              .clipShape(.rect(cornerRadius: 10))
+              .shadow(color: .black.opacity(0.2), radius: 8)
           }
           .scaleEffect(1.0 - abs(distance(movie.index)) * 0.2 )
           .opacity(1.0 - abs(distance(movie.index)) * 0.3 )
