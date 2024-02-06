@@ -35,7 +35,7 @@ public class MovieClient {
     let urlString = "https://api.themoviedb.org/3/movie/popular"
     var urlBuilder = URLComponents(string: urlString)
     urlBuilder?.queryItems = [
-      URLQueryItem(name: "language", value: "ko-KR")
+      URLQueryItem(name: "language", value: "en-US")
     ]
     guard let url = urlBuilder?.url else { return [] }
     
@@ -57,7 +57,7 @@ public class MovieClient {
     let urlString = "https://api.themoviedb.org/3/genre/movie/list"
     var urlBuilder = URLComponents(string: urlString)
     urlBuilder?.queryItems = [
-      URLQueryItem(name: "language", value: "ko-KR")
+      URLQueryItem(name: "language", value: "en-US")
     ]
     guard let url = urlBuilder?.url else { return nil }
     
