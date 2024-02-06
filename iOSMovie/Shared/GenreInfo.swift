@@ -15,20 +15,14 @@ class GenreInfo {
   private init() { }
   
   func idToName(idArray: [Int]) -> [String] {
-    var genreIDList: [Int] = genreList?.genres.map { $0.id } ?? []
-    var genreNameList: [String] = genreList?.genres.map { $0.name } ?? []
-    var resultArray: [String] = []
-    print(genreIDList)
-    print(genreNameList)
-    for id in idArray {
-      var cnt = 0
-      for genreID in genreIDList {
-        if id == genreID {
-          resultArray.append(genreNameList[cnt])
-        }
-        cnt += 1
-      }
+    let genreArray: [(Int, String)] = genreList?.genres.map { ($0.id, $0.name) } ?? []
+    let resultArray = idArray.flatMap { id in // flatMap으로 2차원 배열을 단일 배열로 치환
+      genreArray.filter {
+        $0.0 == id // 선택한 영화의 장르 id와 기준 장르 id 비교
+      }.map { $0.1 } // 튜플 두 번째 받아오기 -> name
     }
     return resultArray
   }
 }
+
+// 고차함수를 통한 리팩토링
