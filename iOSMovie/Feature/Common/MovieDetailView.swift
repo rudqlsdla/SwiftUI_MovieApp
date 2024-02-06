@@ -5,6 +5,7 @@
 //  Created by 임경빈 on 1/24/24.
 //
 
+import ExpandableText
 import Kingfisher
 import SwiftUI
 
@@ -37,10 +38,13 @@ struct MovieDetailView: View {
         Text(detailText)
           .font(.system(size: 14, weight: .light))
         
-        Text(movie.overview)
+        ExpandableText(text: movie.overview)
           .font(.system(size: 14, weight: .regular))
+          .lineLimit(3)
+          .expandButton(TextSet(text: "more", font: .body, color: .blue))
+          .collapseButton(TextSet(text: "less", font: .body, color: .blue))
+          .expandAnimation(.easeOut(duration: 0.5))
       }
-      
       Spacer()
     }
     .padding(20)
