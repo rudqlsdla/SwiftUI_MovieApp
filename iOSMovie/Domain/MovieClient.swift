@@ -10,6 +10,7 @@ import Foundation
 public class MovieClient {
   private let apiKey = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWM0MmYyNWYxM2UwYzU4ZjhiNDNmZDAyMjBhZGZhOCIsInN1YiI6IjY1NmFiYWMxODg2MzQ4MDBhZGUyZTM2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ApXGO8__3s4MpeYuV29nO1Ti2-goSkzvpwZGN7jFNgo"
   
+  // 검색 영화 받아오기
   func getSearchData(searchText: String) async throws -> [Movie] {
     let headers = [
       "accept": "application/json",
@@ -31,6 +32,7 @@ public class MovieClient {
     }
   }
   
+  // 인기 있는 영화 받아오기
   func getTopRatedMovie() async throws -> [Movie] {
     let urlString = "https://api.themoviedb.org/3/movie/popular"
     var urlBuilder = URLComponents(string: urlString)
@@ -53,6 +55,26 @@ public class MovieClient {
     }
   }
   
+  func getDetailInfo(movieID: Int) async throws -> MovieInfo? {
+    let urlString = "https://api.themoviedb.org/3/movie/\(movieID)"
+    guard let url = URL(string: urlString) else { return nil  }
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    request.setValue(apiKey, forHTTPHeaderField: "Authorization")
+    request.setValue("application/json", forHTTPHeaderField: "accept")
+    
+    do {
+      let (data, _) = try await URLSession.shared.data(for: request)
+      print(data)
+      let infoModel = try JSONDecoder().decode(MovieInfoModel.self, from: data)
+      print(infoModel)
+      return infoModel.toEntitiy()
+    } catch {
+      throw error
+    }
+  }
+  
+  // 장르 받아오기
   func getGenres() async throws -> GenreList? {
     let urlString = "https://api.themoviedb.org/3/genre/movie/list"
     var urlBuilder = URLComponents(string: urlString)
