@@ -10,16 +10,17 @@ import Kingfisher
 import SwiftUI
 
 struct MovieDetailView: View {
-  let movie: Movie
   @State private var movieInfo: MovieInfo?
   @State private var genreList: [String] = []
   @State private var genreText: String = ""
   @State private var detailText: String = ""
   
+  let movie: Movie
+  let closeAction: () -> Void
   
   var body: some View {
     VStack(spacing: 0){
-      DetailHeaderView()
+      DetailHeaderView(closeAction: closeAction)
       ScrollView {
         VStack(spacing: 10) {
           KFImage(URL(string: "https://image.tmdb.org/t/p/w1280/\(movie.backdropPath)"))

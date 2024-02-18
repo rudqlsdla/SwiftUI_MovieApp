@@ -8,31 +8,29 @@
 import SwiftUI
 
 struct DetailHeaderView: View {
-    var body: some View {
-      HStack(spacing: 15) {
-        Button {
-          //close
-        } label: {
-          Image(systemName: "xmark")
-        }
-
-        Spacer()
-        Button {
-          //review
-        } label: {
-          Image(systemName: "book.pages")
-        }
-        
-        Button {
-          //share
-        } label: {
-          Image(systemName: "square.and.arrow.up")
-        }
+  let closeAction: () -> Void
+  
+  var body: some View {
+    HStack(spacing: 15) {
+      Button {
+        closeAction()
+      } label: {
+        Image(systemName: "xmark")
       }
-      .padding()
+      
+      Spacer()
+      Button {
+        //review
+      } label: {
+        Image(systemName: "book.pages")
+      }
+      
+      Button {
+        //share
+      } label: {
+        Image(systemName: "square.and.arrow.up")
+      }
     }
-}
-
-#Preview {
-    DetailHeaderView()
+    .padding()
+  }
 }

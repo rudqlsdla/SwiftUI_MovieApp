@@ -98,7 +98,9 @@ extension HomeView {
           }
         }
         .sheet(item: $selectedMovie) { selectedMovie in
-          MovieDetailView(movie: selectedMovie)
+          MovieDetailView(movie: selectedMovie) {
+            self.selectedMovie = nil
+          }
         }
       }
       .gesture(
