@@ -14,19 +14,20 @@ struct HomeView: View {
   @State private var isLoading = false
   
   var body: some View {
-    ZStack {
-      if isLoading {
-        LottieView(animation: .named("Loading_Lottie"))
-          .looping()
-          .scaleEffect(4)
-      }
+    ScrollView {
       VStack(spacing: 7) {
         BestMovieTextView()
-        PageView(topRatedMovieList: $topRatedMovieList)
-        Spacer()
-      }
-      .onAppear {
-        Task {
+        ZStack {
+          if isLoading {
+            LottieView(animation: .named("Loading_Lottie"))
+              .looping()
+              .scaleEffect(4)
+              .offset(y: 200)
+          } else {
+            PageView(topRatedMovieList: $topRatedMovieList)
+          }
+        }
+        .task {
           do {
             isLoading.toggle()
             topRatedMovieList = try await MovieClient().getTopRatedMovie()
@@ -84,7 +85,7 @@ extension HomeView {
           // article view
           VStack {
             KFImage(URL(string: "https://image.tmdb.org/t/p/w342/\(movie.posterPath)"))
-//              .resizable()
+            //              .resizable()
               .scaledToFit()
               .clipShape(.rect(cornerRadius: 10))
               .shadow(color: .black.opacity(0.2), radius: 8)
