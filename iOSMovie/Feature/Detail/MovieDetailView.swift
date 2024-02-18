@@ -18,51 +18,54 @@ struct MovieDetailView: View {
   
   
   var body: some View {
-    ScrollView {
-      VStack(spacing: 10) {
-        KFImage(URL(string: "https://image.tmdb.org/t/p/w1280/\(movie.backdropPath)"))
-          .placeholder {
-            Image(systemName: "movieclapper")
+    VStack(spacing: 0){
+      DetailHeaderView()
+      ScrollView {
+        VStack(spacing: 10) {
+          KFImage(URL(string: "https://image.tmdb.org/t/p/w1280/\(movie.backdropPath)"))
+            .placeholder {
+              Image(systemName: "movieclapper")
+            }
+            .fade(duration: 0.3)
+            .resizable()
+            .aspectRatio(16/9, contentMode: .fit)
+            .clipShape(.rect(cornerRadius: 20))
+            .shadow(color: .black.opacity(0.5), radius: 5)
+          //        .overlay(
+          //          LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.5)]),
+          //                         startPoint: .top,
+          //                         endPoint: .bottom)
+          //        )
+          
+          VStack(spacing: 8) {
+            Text(movie.title)
+              .multilineTextAlignment(.center)
+              .font(.system(size: 24, weight: .bold))
+            
+            Text(genreText)
+              .font(.system(size: 14, weight: .light))
+            
+            Text(detailText)
+              .font(.system(size: 14, weight: .light))
+            
+            ExpandableText(text: movie.overview)
+              .font(.system(size: 14, weight: .regular))
+              .lineLimit(3)
+              .expandButton(TextSet(text: "more", font: .body, color: .blue))
+              .collapseButton(TextSet(text: "less", font: .body, color: .blue))
           }
-          .fade(duration: 0.3)
-          .resizable()
-          .aspectRatio(16/9, contentMode: .fit)
-          .clipShape(.rect(cornerRadius: 20))
-          .shadow(color: .black.opacity(0.5), radius: 5)
-        //        .overlay(
-        //          LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.5)]),
-        //                         startPoint: .top,
-        //                         endPoint: .bottom)
-        //        )
-        
-        VStack(spacing: 8) {
-          Text(movie.title)
-            .multilineTextAlignment(.center)
-            .font(.system(size: 24, weight: .bold))
           
-          Text(genreText)
-            .font(.system(size: 14, weight: .light))
+          HStack {
+            Text("Cast")
+              .font(.system(size: 24, weight: .semibold))
+            Spacer()
+          }
+          .padding(.top, 5)
           
-          Text(detailText)
-            .font(.system(size: 14, weight: .light))
-          
-          ExpandableText(text: movie.overview)
-            .font(.system(size: 14, weight: .regular))
-            .lineLimit(3)
-            .expandButton(TextSet(text: "more", font: .body, color: .blue))
-            .collapseButton(TextSet(text: "less", font: .body, color: .blue))
+          CreditsListView(movieID: movie.id)
         }
-        
-        HStack {
-          Text("Cast")
-            .font(.system(size: 24, weight: .semibold))
-          Spacer()
-        }
-        .padding(.top, 5)
-        
-        CreditsListView(movieID: movie.id)
+        .padding(EdgeInsets(top: 5, leading: 20, bottom: 20, trailing: 20))
       }
-      .padding(20)
     }
     .onAppear {
       getGenre()
