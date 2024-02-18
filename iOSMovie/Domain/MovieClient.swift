@@ -96,4 +96,24 @@ public class MovieClient {
       throw error
     }
   }
+  
+  // credits 받아오기
+  func getCredits(movieID: Int) async throws -> Credits? {
+    let urlString = "https://api.themoviedb.org/3/movie/\(movieID)/credits"
+    guard let url = URL(string: urlString) else { return nil  }
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    request.setValue(apiKey, forHTTPHeaderField: "Authorization")
+    request.setValue("application/json", forHTTPHeaderField: "accept")
+    
+    do {
+      let (data, _) = try await URLSession.shared.data(for: request)
+      print(data)
+      let creditsModel = try JSONDecoder().decode(CreditsModel.self, from: data)
+      print(creditsModel)
+      return creditsModel.toEntity()
+    } catch {
+      throw error
+    }
+  }
 }
