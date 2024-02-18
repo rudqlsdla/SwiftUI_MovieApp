@@ -71,7 +71,7 @@ struct TabBarItem: View {
     } label: {
       VStack {
         if currentTab == tab {
-          Color.black121244
+          Color.blue1112AF
             .frame(height: 2)
             .matchedGeometryEffect(id: "underline", in: namespace, properties: .frame)
         } else {
@@ -81,11 +81,11 @@ struct TabBarItem: View {
         Image(systemName: tabBarItemImageName)
           .padding(.top, 2)
           .font(.system(size: 18))
-          .foregroundStyle(currentTab == tab ? Color.black121244 : Color.gray)
+          .foregroundStyle(currentTab == tab ? Color.blue1112AF : Color.gray)
         
         Text(tabBarItemName)
           .font(.system(size: 14))
-          .foregroundStyle(currentTab == tab ? Color.black121244 : Color.gray)
+          .foregroundStyle(currentTab == tab ? Color.blue1112AF : Color.gray)
         
         Spacer()
       }

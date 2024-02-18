@@ -14,7 +14,7 @@ public struct MovieList {
   public let totalResults: Int
 }
 
-public struct Movie: Codable, Identifiable {
+public struct Movie: Codable, Identifiable, Equatable {
   public var index: Int
   public let adult: Bool
   public let backdropPath: String

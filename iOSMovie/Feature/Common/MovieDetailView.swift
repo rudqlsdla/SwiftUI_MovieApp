@@ -27,6 +27,7 @@ struct MovieDetailView: View {
         .resizable()
         .aspectRatio(16/9, contentMode: .fit)
         .clipShape(.rect(cornerRadius: 20))
+        .shadow(color: .black.opacity(0.5), radius: 5)
 //        .overlay(
 //          LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.5)]),
 //                         startPoint: .top,

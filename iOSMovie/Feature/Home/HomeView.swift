@@ -31,9 +31,7 @@ struct HomeView: View {
             isLoading.toggle()
             topRatedMovieList = try await MovieClient().getTopRatedMovie()
             for index in 0..<topRatedMovieList.count {
-              print(topRatedMovieList[index])
               topRatedMovieList[index].index = index
-              print(topRatedMovieList[index])
             }
             isLoading.toggle()
           } catch {
@@ -56,12 +54,12 @@ extension HomeView {
               Text("selected")
               Text("Best")
                 .font(.system(size: 40, weight: .bold))
-                .foregroundStyle(.black121244)
+                .foregroundStyle(.blue1112AF)
             }
             HStack {
               Text("Movies")
                 .font(.system(size: 40, weight: .bold))
-                .foregroundStyle(.black121244)
+                .foregroundStyle(.blue1112AF)
               Text("for you")
             }
           }
