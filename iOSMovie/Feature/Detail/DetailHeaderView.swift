@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailHeaderView: View {
+  @State private var isReviewPresented = false
   @State private var isSharePresented = false
   
   let movie: Movie
@@ -23,7 +24,7 @@ struct DetailHeaderView: View {
       
       Spacer()
       Button {
-        //review
+        isReviewPresented = true
       } label: {
         Image(systemName: "book.pages")
       }
@@ -35,8 +36,11 @@ struct DetailHeaderView: View {
       }
     }
     .padding()
+    .sheet(isPresented: $isReviewPresented, content: {
+      CreateReviewView(movieTitle: movie.title, isPresented: $isReviewPresented)
+    })
     .sheet(isPresented: $isSharePresented, content: {
-      ActivityViewController(activityItems: [movie.title, movie.overview, movie.releaseDate])
+      ActivityViewController(activityItems: ["Title : \(movie.title)", "Overview : \(movie.overview)", "release : \(movie.releaseDate)"])
     })
   }
 }
