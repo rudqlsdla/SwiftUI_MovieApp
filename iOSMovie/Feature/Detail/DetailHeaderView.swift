@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct DetailHeaderView: View {
+  @State private var isSharePresented = false
+  
+  let movie: Movie
   let closeAction: () -> Void
   
   var body: some View {
@@ -26,11 +29,14 @@ struct DetailHeaderView: View {
       }
       
       Button {
-        //share
+        isSharePresented = true
       } label: {
         Image(systemName: "square.and.arrow.up")
       }
     }
     .padding()
+    .sheet(isPresented: $isSharePresented, content: {
+      ActivityViewController(activityItems: [movie.title, movie.overview, movie.releaseDate])
+    })
   }
 }

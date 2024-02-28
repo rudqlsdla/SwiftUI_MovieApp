@@ -20,7 +20,7 @@ struct MovieDetailView: View {
   
   var body: some View {
     VStack(spacing: 0){
-      DetailHeaderView(closeAction: closeAction)
+      DetailHeaderView(movie: movie, closeAction: closeAction)
       ScrollView {
         VStack(spacing: 10) {
           KFImage(URL(string: "https://image.tmdb.org/t/p/w1280/\(movie.backdropPath)"))
@@ -65,7 +65,7 @@ struct MovieDetailView: View {
           
           CreditsListView(movieID: movie.id)
         }
-        .padding(EdgeInsets(top: 5, leading: 20, bottom: 20, trailing: 20))
+        .padding(EdgeInsets(top: 15, leading: 20, bottom: 20, trailing: 20))
       }
     }
     .onAppear {
