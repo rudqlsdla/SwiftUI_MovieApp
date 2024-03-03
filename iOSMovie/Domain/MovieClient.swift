@@ -17,7 +17,7 @@ public class MovieClient {
       "Authorization": apiKey
     ]
     
-    let url = URL(string: "https://api.themoviedb.org/3/search/movie?query=\(searchText)&include_adult=false&language=ko-KR&page=1")!
+    let url = URL(string: "https://api.themoviedb.org/3/search/movie?query=\(searchText)&include_adult=false&language=en-US&page=1")!
     
     var request = URLRequest(url: url)
     request.httpMethod = "GET"

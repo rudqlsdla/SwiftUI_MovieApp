@@ -27,7 +27,7 @@ struct SearchListView: View {
           }
           .sheet(item: $selectedMovie) { selectedMovie in
             MovieDetailView(movie: selectedMovie) {
-              
+              self.selectedMovie = nil
             }
           }
         }
