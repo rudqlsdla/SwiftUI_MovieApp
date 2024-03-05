@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct ReviewData {
   var rating: Int = 0
@@ -37,7 +38,7 @@ extension EvaluationItem {
   }
 }
 
-enum EvaluationType {
+enum EvaluationType: Int, PersistableEnum {
   case bad
   case soso
   case good
