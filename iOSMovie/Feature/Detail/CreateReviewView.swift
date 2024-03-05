@@ -5,14 +5,17 @@
 //  Created by 임경빈 on 2/28/24.
 //
 
+import RealmSwift
 import SwiftUI
 
 struct CreateReviewView: View {
+  @Environment(\.realm) var realm
   @State private var rank: Int = 0
   @State private var reviewText = ""
   @State private var reviewData = ReviewData()
   
   let movieTitle: String
+  let posterURL: String
   @Binding var isPresented: Bool
   
   var body: some View {
@@ -75,7 +78,18 @@ struct CreateReviewView: View {
       
       Button {
         //리뷰 저장
-        isPresented = false
+        let reviewSection = ReviewSection()
+        reviewSection.title = movieTitle
+        reviewSection.posterURL = posterURL
+        reviewSection.rating = reviewData.rating
+        reviewSection.performance = reviewData.performance
+        reviewSection.story = reviewData.story
+        reviewSection.sound = reviewData.sound
+        reviewSection.record = reviewData.record
+        try? realm.write {
+          realm.add(reviewSection)
+          isPresented = false
+        }
       } label: {
         Text("Save")
           .font(.system(size: 18, weight: .medium))
