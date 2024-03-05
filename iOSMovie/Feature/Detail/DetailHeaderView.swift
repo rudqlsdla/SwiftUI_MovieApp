@@ -37,7 +37,7 @@ struct DetailHeaderView: View {
     }
     .padding()
     .sheet(isPresented: $isReviewPresented, content: {
-      CreateReviewView(movieTitle: movie.title, isPresented: $isReviewPresented)
+      CreateReviewView(movieTitle: movie.title, posterURL: movie.posterPath, isPresented: $isReviewPresented)
     })
     .sheet(isPresented: $isSharePresented, content: {
       ActivityViewController(activityItems: ["Title : \(movie.title)", "Overview : \(movie.overview)", "release : \(movie.releaseDate)"])
